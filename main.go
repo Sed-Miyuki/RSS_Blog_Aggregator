@@ -29,6 +29,8 @@ func main(){
 	}
 	commands.Register("login", handlers.LoginHandler)
 	commands.Register("register", handlers.RegisterHandler)
+	commands.Register("reset", handlers.ResetUsersHandler)
+	commands.Register("users", handlers.GetUsersHandler)
 	if len(os.Args)<2{
 		log.Fatal("usage: boot-dev-blog-aggregator <command> [args...]")
 		return
