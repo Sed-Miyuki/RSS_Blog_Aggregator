@@ -7,7 +7,7 @@ import (
 	"github.com/Sed-Miyuki/RSS_Blog_Aggregator/internal/config"
 )
 
-func HandleLogin(s *config.State,cmd config.Command) error{
+func LoginHandler(s *config.State,cmd config.Command) error{
 	if(len(cmd.Args)<1){
 		return errors.New("missing required argument USERNAME")
 	}

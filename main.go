@@ -1,11 +1,14 @@
 package main
 
 import (
+	"database/sql"
 	"log"
 	"os"
 
 	"github.com/Sed-Miyuki/RSS_Blog_Aggregator/internal/config"
+	"github.com/Sed-Miyuki/RSS_Blog_Aggregator/internal/database"
 	"github.com/Sed-Miyuki/RSS_Blog_Aggregator/internal/handlers"
+	_ "github.com/lib/pq"
 )
 
 var commands config.Commands
@@ -15,13 +18,17 @@ func main(){
 	if err!=nil{
 		log.Fatal(err)
 	}
+	db,err:=sql.Open("postgres", cfg.DbUrl)
+	dbQueries:=database.New(db)
 	state:=config.State{
-		Config:&cfg,
+		DB:     dbQueries,
+		Config:	&cfg,
 	}
 	commands=config.Commands{
 		Commands:map[string]func(*config.State, config.Command) error{},
 	}
-	commands.Register("login",handlers.HandleLogin)
+	commands.Register("login", handlers.LoginHandler)
+	commands.Register("register", handlers.RegisterHandler)
 	if len(os.Args)<2{
 		log.Fatal("usage: boot-dev-blog-aggregator <command> [args...]")
 		return
