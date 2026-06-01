@@ -33,6 +33,7 @@ func main(){
 	commands.Register("users", handlers.GetUsersHandler)
 	commands.Register("agg", handlers.FetchFeedHandler)
 	commands.Register("addfeed", handlers.AddFeedHandler)
+	commands.Register("feeds", handlers.ListFeedHandler)
 	if len(os.Args)<2{
 		log.Fatal("usage: boot-dev-blog-aggregator <command> [args...]")
 		return
