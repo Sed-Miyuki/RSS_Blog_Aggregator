@@ -15,6 +15,6 @@ func LoginHandler(s *config.State,cmd config.Command) error{
 	if err!=nil{
 		return fmt.Errorf("failed to set current user: %w", err)
 	}
-	fmt.Printf("User set to %s\n", s.Config.CurrentUserName)
+	fmt.Printf("User set to %s\n", cmd.Args[0])
 	return nil
 }
